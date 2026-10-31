@@ -1,22 +1,34 @@
-ARG BUILD_FROM=ghcr.io/home-assistant/base:3.24-2026.10.1
+ARG BUILD_FROM=ghcr.io/home-assistant/base-python:3.14-alpine3.24-2026.10.1
+ARG BUILD_ARCH=amd64
 
 # renovate: datasource=repology depName=alpine_3_24/git
 ARG GIT_VERSION=2.54.0-r0
-# renovate: datasource=repology depName=alpine_3_24/python3
-ARG PYTHON_VERSION=3.14.8-r0
-# renovate: datasource=repology depName=alpine_3_24/py3-yaml
-ARG PY3_YAML_VERSION=6.0.3-r2
+# Alpine 3.22 is the last base image generation for the 32-bit architectures.
+# renovate: datasource=repology depName=alpine_3_22/git
+ARG GIT_VERSION_LEGACY=2.49.1-r0
+# renovate: datasource=pypi depName=PyYAML
+ARG PYYAML_VERSION=6.0.3
 
-FROM ${BUILD_FROM}
+# Current multi-architecture images cover amd64 and aarch64. Keep the last official
+# Python images for the older architectures; BuildKit only builds the selected stage.
+FROM ${BUILD_FROM} AS base-amd64
+FROM ${BUILD_FROM} AS base-aarch64
+FROM ghcr.io/home-assistant/armv7-base-python:3.13-alpine3.22-2025.11.1 AS base-armv7
+FROM ghcr.io/home-assistant/armhf-base-python:3.13-alpine3.22-2025.11.1 AS base-armhf
+FROM ghcr.io/home-assistant/i386-base-python:3.13-alpine3.22-2025.11.1 AS base-i386
 
-# The exporter is plain Python (standard library and PyYAML) and git; nothing else is needed.
+FROM base-${BUILD_ARCH}
+
+# Python is supplied by the base image; install PyYAML into that same interpreter.
 ARG GIT_VERSION
-ARG PYTHON_VERSION
-ARG PY3_YAML_VERSION
-RUN apk add --no-cache \
-    git=${GIT_VERSION} \
-    python3=${PYTHON_VERSION} \
-    py3-yaml=${PY3_YAML_VERSION}
+ARG GIT_VERSION_LEGACY
+ARG PYYAML_VERSION
+ARG BUILD_ARCH
+RUN case "${BUILD_ARCH}" in \
+        armv7|armhf|i386) GIT_VERSION="${GIT_VERSION_LEGACY}" ;; \
+    esac \
+    && apk add --no-cache git=${GIT_VERSION} \
+    && python3 -m pip install --no-cache-dir PyYAML==${PYYAML_VERSION}
 
 COPY rootfs/ /
 COPY LICENSE THIRD_PARTY_NOTICES.md /usr/share/licenses/git-exporter/
@@ -24,8 +36,7 @@ COPY LICENSE THIRD_PARTY_NOTICES.md /usr/share/licenses/git-exporter/
 # Git does not keep the executable bit when files are uploaded through the GitHub API.
 RUN find /etc/s6-overlay/s6-rc.d -type f \( -name run -o -name finish \) -exec chmod a+x {} +
 
-ARG BUILD_VERSION=2.0.0-beta.1
-ARG BUILD_ARCH=amd64
+ARG BUILD_VERSION=2.0.0-beta.2
 RUN mkdir -p /etc/git-exporter && echo "${BUILD_VERSION}" >/etc/git-exporter/version
 LABEL io.hass.version="${BUILD_VERSION}" \
     io.hass.type="addon" \
