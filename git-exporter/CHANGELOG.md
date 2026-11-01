@@ -1,5 +1,13 @@
 # Changelog
 
+## 2.0.0-beta.2
+
+* Use the official Home Assistant Python base image instead of installing Python from Alpine packages.
+* Install PyYAML with the base image's Python interpreter. This fixes installation when Alpine removes
+  the previously pinned Python package revision.
+* Keep all five architectures: amd64 and aarch64 use Python 3.14; armv7, armhf and i386 use the last
+  official Python 3.13 images for Alpine 3.22. The Supervisor can also build those images locally.
+
 ## 2.0.0-beta.1
 
 A new major version, rewritten around a web interface. Updating needs no action: the single repository of
