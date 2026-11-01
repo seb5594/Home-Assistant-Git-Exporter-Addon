@@ -1,5 +1,5 @@
 name: Home Assistant Git Exporter
-version: "2.0.0-beta.1"
+version: "2.0.0-beta.2"
 slug: git-exporter
 description: Exports your Home Assistant configuration to one or more git repositories (GitHub, GitLab, Gitea and others), for private use or for the public, with a preview and a file browser.
 url: https://github.com/seb5594/Home-Assistant-git-exporter-Addon
