@@ -3,8 +3,10 @@
 | Component | License | Source |
 | --- | --- | --- |
 | The original Git Exporter app of the Home Assistant community, on which version 1 of this app is based | Apache-2.0, see `LICENSE` | see the history of this repository |
-| Home Assistant base image with bashio and s6-overlay | Apache-2.0, MIT | <https://github.com/home-assistant/docker-base> |
-| Git, Python, PyYAML (installed through Alpine packages) | GPL-2.0, PSF-2.0, MIT | <https://pkgs.alpinelinux.org> |
+| Home Assistant Python base image with bashio and s6-overlay | Apache-2.0, MIT | <https://github.com/home-assistant/docker-base> |
+| Python (provided by the base image) | PSF-2.0 | <https://www.python.org> |
+| Git (installed through Alpine packages) | GPL-2.0 | <https://pkgs.alpinelinux.org> |
+| PyYAML (installed through pip) | MIT | <https://pypi.org/project/PyYAML/> |
 
 The notices of the Alpine packages are in the image under `/usr/share/licenses`.
 

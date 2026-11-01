@@ -61,6 +61,10 @@ git-exporter/
 .github/tests/                          unit tests, run inside the built image by runtime.sh
 ```
 
+The image uses the official Home Assistant Python base. `git-exporter/Dockerfile` selects Python 3.14
+for amd64 and aarch64 and the last official Python 3.13 / Alpine 3.22 images for armv7, armhf and i386.
+PyYAML is installed with that interpreter's `pip`; Python itself is not installed through `apk`.
+
 Based on the original Git Exporter work from the Home Assistant community. Maintained by
 [seb5594](https://github.com/seb5594).
 
