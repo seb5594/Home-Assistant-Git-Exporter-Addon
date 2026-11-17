@@ -1,5 +1,10 @@
 # Changelog
 
+## 2.0.0-beta.3
+
+- Use the personal Home Assistant base release 2026.11.0 on all supported architectures.
+- Publish one multi-architecture image per version for direct pulls and Supervisor installs.
+
 ## 2.0.0-beta.2
 
 * Use the official Home Assistant Python base image instead of installing Python from Alpine packages.
