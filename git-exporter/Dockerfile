@@ -2,7 +2,7 @@ ARG BUILD_FROM=ghcr.io/home-assistant/base-python:3.14-alpine3.24-2026.10.1
 ARG BUILD_ARCH=amd64
 
 # renovate: datasource=repology depName=alpine_3_24/git
-ARG GIT_VERSION=2.54.0-r0
+ARG GIT_VERSION=2.54.1-r0
 # Alpine 3.22 is the last base image generation for the 32-bit architectures.
 # renovate: datasource=repology depName=alpine_3_22/git
 ARG GIT_VERSION_LEGACY=2.49.1-r0
