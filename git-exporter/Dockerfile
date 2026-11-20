@@ -1,17 +1,13 @@
-ARG BUILD_FROM=ghcr.io/seb5594/home-assistant-base-python:3.14-alpine3.24-2026.11.0@sha256:807723c78eeeb57962063875e19b500571a5a6e89423977db6d1123832f1550e
+ARG BUILD_FROM=ghcr.io/seb5594/home-assistant-base-python:3.14-alpine3.24-2026.11.0
 
-# renovate: datasource=repology depName=alpine_3_24/git
-ARG GIT_VERSION=2.54.1-r0
 # renovate: datasource=pypi depName=PyYAML
 ARG PYYAML_VERSION=6.0.3
 
 FROM ${BUILD_FROM}
 
 # Python is supplied by the base image; install PyYAML into that same interpreter.
-ARG GIT_VERSION
 ARG PYYAML_VERSION
-ARG BUILD_ARCH=amd64
-RUN apk add --no-cache git=${GIT_VERSION} \
+RUN apk add --no-cache git \
     && python3 -m pip install --no-cache-dir PyYAML==${PYYAML_VERSION}
 
 COPY rootfs/ /
@@ -24,7 +20,8 @@ ARG BUILD_VERSION=2.0.0-beta.3
 RUN mkdir -p /etc/git-exporter && echo "${BUILD_VERSION}" >/etc/git-exporter/version
 LABEL io.hass.version="${BUILD_VERSION}" \
     io.hass.type="addon" \
-    io.hass.arch="${BUILD_ARCH}" \
+    org.opencontainers.image.title="Home Assistant App: Home Assistant Git Exporter" \
+    org.opencontainers.image.version="${BUILD_VERSION}" \
     org.opencontainers.image.source="https://github.com/seb5594/Home-Assistant-git-exporter-Addon"
 
 ENV PYTHONPATH=/opt/git-exporter \
