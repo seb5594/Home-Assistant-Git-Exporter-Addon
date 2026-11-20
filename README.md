@@ -10,6 +10,7 @@
   <img src="https://img.shields.io/static/v1?label=stage&amp;message=experimental&amp;color=2F855A&amp;style=flat" alt="stage" height="20">
   <img src="https://img.shields.io/static/v1?label=ingress&amp;message=enabled&amp;color=7C3AED&amp;style=flat" alt="ingress" height="20">
   <img src="https://img.shields.io/static/v1?label=arch%20%26%20size&amp;message=amd64%2043.1%20%C2%B7%20aarch64%2042.9%20%C2%B7%20armv7%2039.6%20%C2%B7%20armhf%2040.8%20%C2%B7%20i386%2042.4%20MiB&amp;color=157F71&amp;style=flat" alt="arch &amp; size" height="20">
+  <a href="https://github.com/seb5594/home-assistant-base-multi-arch"><img src="https://img.shields.io/static/v1?label=base%20image&amp;message=3.14-alpine3.24-2026.11.0&amp;color=1877A5&amp;style=flat" alt="base image" height="20"></a>
   <img src="https://img.shields.io/static/v1?label=mounts%20%28read-only%29&amp;message=app%20configs%20%C2%B7%20config%20%C2%B7%20local%20apps&amp;color=157F71&amp;style=flat" alt="mounts (read-only)" height="20"><br>
   <a href="https://github.com/seb5594/Home-Assistant-Apps/stargazers"><img src="https://img.shields.io/github/stars/seb5594/Home-Assistant-git-exporter-Addon?label=stars&amp;style=flat" alt="stars" height="20"></a>
   <a href="https://github.com/seb5594/Home-Assistant-Apps/forks"><img src="https://img.shields.io/github/forks/seb5594/Home-Assistant-git-exporter-Addon?label=forks&amp;style=flat" alt="forks" height="20"></a>
